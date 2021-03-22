@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
 
+
+
 @AllArgsConstructor
 public class JdbcTemplate {
 
@@ -34,23 +36,22 @@ public class JdbcTemplate {
         return query(sql,new Object[]{},mapper);
     }
 
-    public <T> List<T> queryOne(String sql, Object[] params, RowMapper<T> mapper)throws SQLException{
+    public <T> T queryOne(String sql, Object[] params, RowMapper<T> mapper)throws SQLException{
         Connection connection=ds.getConnection();
         PreparedStatement statement = connection.prepareStatement(sql);
         for (int i = 0; i <params.length ; i++) {
             statement.setObject(i+1,params[i]);
         }
         ResultSet rs = statement.executeQuery();
-        List<T> list = new ArrayList<>();
+        T t = null;
         if (rs.next()){
-            T t = mapper.map(rs);
-            list.add(t);
+            t = mapper.map(rs);
         }
         connection.close();
-        return list;
+        return t;
     }
 
-    public <T> List<T> queryOne(String sql, RowMapper<T> mapper) throws SQLException{
+    public <T> T queryOne(String sql, RowMapper<T> mapper) throws SQLException{
         return queryOne(sql,new Object[]{}, mapper);
     }
 

@@ -53,4 +53,20 @@ public class DbNoteService implements NoteService{
         }
 
     }
+
+    public Note get(Integer id){
+        try {
+           return template.queryOne(
+                    "SELECT id, name, description, time FROM notes WHERE id = ?",
+                    new Object[]{id},
+                    (ma)-> new Note().setId(ma.getInt("id")).
+                            setName(ma.getString("name")).
+                            setDescription(ma.getString("description")).
+                            setTime(ma.getObject("time", LocalDateTime.class)));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 }

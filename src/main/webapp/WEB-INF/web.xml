@@ -12,7 +12,21 @@
     
     <servlet-mapping>
         <servlet-name>GetPost</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>/notes</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>GetNoteServlet</servlet-name>
+        <servlet-class>com.company.webapp.servlets.GetNoteServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>GetNoteServlet</servlet-name>
+        <url-pattern>/notes/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>GetPost</servlet-name>
+        <url-pattern>/adduser</url-pattern>
     </servlet-mapping>
 
     <servlet>

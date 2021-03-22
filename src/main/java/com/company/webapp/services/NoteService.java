@@ -12,4 +12,5 @@ public interface NoteService {
     void add(String name, String description, LocalDateTime time);
 
     void delete(Integer id);
+    Note get(Integer id);
 }
